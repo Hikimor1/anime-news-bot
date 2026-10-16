@@ -1,0 +1,32 @@
+# Secrets & environment
+.env
+
+# Database
+*.db
+*.sqlite
+
+# Logs
+*.log
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual env
+venv/
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Claude settings
+.claude/
+
+# Build / archives
+*.zip
+banner_implementation_plan*.md

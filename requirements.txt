@@ -1,0 +1,11 @@
+python-telegram-bot>=20.0
+feedparser
+beautifulsoup4
+requests
+openai
+apscheduler
+aiohttp
+python-dotenv
+Pillow
+jinja2
+playwright

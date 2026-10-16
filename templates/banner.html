@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0d0d;
+    width: {{ width }}px;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .banner {
+    padding: 28px {{ padding }}px 20px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .header .line1,
+  .header .line2 {
+    font-weight: 900;
+    font-size: 54px;
+    color: #ffffff;
+    line-height: 1.15;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .subheader {
+    margin-top: 12px;
+    font-size: 24px;
+    font-weight: 400;
+    color: #dcb950;
+    letter-spacing: 0.5px;
+  }
+
+  .divider {
+    height: 2px;
+    background: #333;
+    margin: 16px 0 18px;
+  }
+
+  /* ── Card ── */
+  .card {
+    position: relative;
+    height: {{ card_height }}px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background-color: #111;
+  }
+  .card:last-child { margin-bottom: 0; }
+
+  .card-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center right;
+  }
+  .card-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.7) 35%,
+      rgba(0, 0, 0, 0.25) 65%,
+      rgba(0, 0, 0, 0.05) 100%
+    );
+  }
+
+  .card-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 28px 0 20px;
+    gap: 18px;
+  }
+
+  /* ── Rank ── */
+  .rank {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 28px;
+    color: #000;
+  }
+
+  /* ── Card content ── */
+  .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .title {
+    font-weight: 900;
+    font-size: 40px;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 1.1;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 60%;
+  }
+
+  .episode-pill {
+    flex-shrink: 0;
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 8px 18px;
+    border-radius: 12px;
+    white-space: nowrap;
+    margin-top: 4px;
+  }
+
+  .card-bottom {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .genre-pill {
+    background: rgba(40, 40, 40, 0.92);
+    color: #c8c8c8;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 5px 14px;
+    border-radius: 8px;
+    white-space: nowrap;
+  }
+
+  .rating-block {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .star {
+    font-size: 40px;
+    color: #FFD700;
+    line-height: 1;
+  }
+  .rating-number {
+    font-weight: 900;
+    font-size: 100px;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -2px;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="header">
+    <div class="line1">САМЫЕ ВЫСОКОРЕЙТИНГОВЫЕ</div>
+    <div class="line2">ЭПИЗОДЫ АНИМЕ</div>
+    <div class="subheader">{{ subheader }}</div>
+  </div>
+  <div class="divider"></div>
+
+  {% for ep in episodes %}
+  <div class="card">
+    <div class="card-bg" style="background-image: url('{{ ep.image_data }}');"></div>
+    <div class="card-inner">
+      <div class="rank">{{ ep.rank }}</div>
+      <div class="card-content">
+        <div class="card-top">
+          <div class="title">{{ ep.title }}</div>
+          <div class="episode-pill">{{ ep.episode_info }}</div>
+        </div>
+        <div class="card-bottom">
+          <div class="genres">
+            {% for genre in ep.genres %}
+            <span class="genre-pill">{{ genre }}</span>
+            {% endfor %}
+          </div>
+          <div class="rating-block">
+            <span class="star">★</span>
+            <span class="rating-number">{{ ep.rating }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</body>
+</html>
